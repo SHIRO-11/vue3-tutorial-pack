@@ -1,27 +1,47 @@
 <template>
     <div class="hello">
-        draggable
+        <draggable v-model="data" group="people" item-key="id" handle=".handle">
+            <template #item="{element}">
+                <div class="drag-item">
+                    <span class="handle">ここを押せば動かせます。</span>
+                    {{ element.id }}
+                </div>
+            </template>
+        </draggable>
     </div>
 </template>
 
 <script>
-export default {};
+import draggable from "vuedraggable";
+
+export default {
+    components: {
+        draggable,
+    },
+    data() {
+        return {
+            data: [
+                {
+                    id: 1,
+                    content: "テスト1",
+                },
+                {
+                    id: 2,
+                    content: "テスト2",
+                },
+                {
+                    id: 3,
+                    content: "テスト3",
+                },
+            ],
+        };
+    },
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-    margin: 40px 0 0;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-a {
-    color: #42b983;
+.drag-item {
+    background: rgb(233, 249, 255);
+    margin: 10px 0;
 }
 </style>
